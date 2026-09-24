@@ -5,28 +5,7 @@ A modern data engineering project built using **Databricks, PostgreSQL, Salesfor
 The project demonstrates how data can be incrementally ingested from different source systems, processed through a Bronze → Silver → Gold architecture, and validated using data quality rules.
 
 ## Architecture
-
-```text
-PostgreSQL ───────────────┐
-                          │
-                          ▼
-                    Databricks Connectors
-                          │
-Salesforce ───────────────┘
-                          │
-                          ▼
-                       Bronze
-                          │
-                   Auto Loader
-                          │
-                          ▼
-                 Silver / DLT Pipeline
-                          │
-                 Data Quality Checks
-                          │
-                          ▼
-                        Gold
-```
+![Retail Modern Lakehouse Architecture](diagrams/retail_lakehouse_architecture.png)
 
 ## Technologies Used
 
@@ -115,13 +94,13 @@ The data is structured into business-ready tables that can be consumed by downst
 
 ```text
 Bronze
-   │
+   │  Data quality checks & DLT transformations
    │ Auto Loader
    ▼
 Silver
    │
    │ DLT transformations
-   │ Data quality checks
+   │
    ▼
 Gold
 ```
