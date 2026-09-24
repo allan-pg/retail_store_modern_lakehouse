@@ -2,7 +2,7 @@
 
 A modern data engineering project built using **Databricks, PostgreSQL, Salesforce, Delta Lake, Auto Loader, and Lakeflow Spark Declarative Pipelines (DLT)**.
 
-The project demonstrates how data can be incrementally ingested from different source systems, processed through a Bronze → Silver → Gold architecture, and validated using data quality rules.
+The project demonstrates how data can be incrementally ingested from different source systems, processed through a Bronze → Silver → Gold architecture, and validated using data quality rules.  The overall process is designed to avoid repeatedly processing the entire source datasets.
 
 ## Architecture
 ![Retail Modern Lakehouse Architecture](diagrams/retail_lakehouse_architecture.png)
@@ -158,50 +158,6 @@ Additional expectations can be applied to validate fields such as:
 
 `expect` can be used where the record should remain available but the data quality failure should still be tracked.
 
-## Incremental Data Flow
-
-The overall process is designed to avoid repeatedly processing the entire source datasets.
-
-```text
-                  ┌─────────────────┐
-                  │   PostgreSQL    │
-                  └────────┬────────┘
-                           │
-                   Cursor column
-                           │
-                           ▼
-                  ┌─────────────────┐
-                  │    Databricks   │
-                  │    Connector    │
-                  └────────┬────────┘
-                           │
-                           │
-┌─────────────────┐        │
-│    Salesforce   │────────┘
-└────────┬────────┘
-         │
-         │ Databricks connector
-         │ New / changed records
-         ▼
-┌─────────────────────────┐
-│         Bronze          │
-│      Delta Tables       │
-└────────────┬────────────┘
-             │
-             │ Auto Loader
-             ▼
-┌─────────────────────────┐
-│         Silver          │
-│   DLT Transformations   │
-│   Data Quality Checks   │
-└────────────┬────────────┘
-             │
-             ▼
-┌─────────────────────────┐
-│          Gold           │
-│   Analytics-ready data  │
-└─────────────────────────┘
-```
 
 ## Key Features
 
