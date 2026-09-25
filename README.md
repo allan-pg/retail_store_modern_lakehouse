@@ -1,8 +1,26 @@
 # Retail Modern Lakehouse
+## Problem Statement
 
-A modern data engineering project built using **Databricks, PostgreSQL, Salesforce, Delta Lake, Auto Loader, and Lakeflow Spark Declarative Pipelines (DLT)**.
+The business currently downloads data manually as CSV files from multiple platforms, including PostgreSQL and Salesforce. This manual process makes data integration time-consuming, difficult to maintain, and prone to inconsistencies. It also limits the availability of reliable, up-to-date data for reporting and analytics.
 
-The project demonstrates how data can be incrementally ingested from different source systems, processed through a Bronze → Silver → Gold architecture, and validated using data quality rules.  The overall process is designed to avoid repeatedly processing the entire source datasets.
+As a Data Engineer, my responsibility is to design and build a resilient data pipeline that automates the ingestion of data from these source systems, processes it through a **Bronze → Silver → Gold medallion architecture**, and produces a **Kimball dimensional model (star schema)** that is ready for analytics and business intelligence.
+
+The solution focuses on:
+
+* **Automated ingestion:** Reduce manual CSV downloads by establishing repeatable data ingestion processes from the source systems.
+* **Incremental processing:** Process new and changed records rather than repeatedly reprocessing entire datasets.
+* **Data quality:** Apply validation rules, identify invalid records, and retain data quality issues for investigation and remediation.
+* **Medallion architecture:** Preserve raw data in Bronze, clean and integrate data in Silver, and build analytics-ready fact and dimension tables in Gold.
+* **Resilience and maintainability:** Handle pipeline failures gracefully, support safe reruns, and maintain clear data lineage and transformation logic.
+
+### Engineering Approach
+
+The objective is not to build a perfect or overly complex solution, but to demonstrate sound data engineering principles, clear architectural decisions, and an understanding of how to build reliable pipelines.
+
+The emphasis is on building a system that is **incremental, fault-tolerant, transparent, and maintainable**. A pipeline that handles failures gracefully, preserves data quality issues, and clearly explains its design decisions is more valuable than one that is technically complete but brittle or difficult to understand.
+
+The final outcome is a reusable lakehouse solution that transforms manually sourced operational data into trusted, analytics-ready datasets for reporting and business intelligence.
+
 
 ## Architecture
 ![Retail Modern Lakehouse Architecture](diagrams/retail_lakehouse_architecture.png)
